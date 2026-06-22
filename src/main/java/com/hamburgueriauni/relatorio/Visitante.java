@@ -1,8 +1,10 @@
 package com.hamburgueriauni.relatorio;
 
-import com.hamburgueriauni.cardapio.ItemCardapio;
+import com.hamburgueriauni.cardapio.CardapioCategoria;
+import com.hamburgueriauni.cardapio.CardapioFolha;
 
-// Interface do padrão Visitor (visitante)
+// Padrão Visitor: interface do visitante com um método por tipo concreto visitável
 public interface Visitante {
-    void visitar(ItemCardapio item);
+    void visitar(CardapioFolha folha);
+    void visitar(CardapioCategoria categoria);
 }
