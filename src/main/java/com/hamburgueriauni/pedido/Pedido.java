@@ -57,9 +57,24 @@ public abstract class Pedido {
     public void entregar()       { estadoAtual.entregar(this); }
     public void cancelar()       { estadoAtual.cancelar(this); }
 
+    // --- Memento: salva e restaura estado ---
+
+    public PedidoMemento criarMemento() {
+        return new PedidoMemento(itens, estadoAtual);
+    }
+
+    public void restaurarMemento(PedidoMemento memento) {
+        this.itens.clear();
+        this.itens.addAll(memento.getItens());
+        this.estadoAtual = memento.getEstado();
+        System.out.println("[Memento] Pedido #" + id + " restaurado para: " + estadoAtual.getStatus());
+    }
+
     // --- Itens ---
 
     public void adicionarItem(ItemCardapio item) { itens.add(item); }
+
+    public void removerItem(ItemCardapio item) { itens.remove(item); }
 
     public double calcularTotal() {
         return itens.stream().mapToDouble(ItemCardapio::getPreco).sum();
